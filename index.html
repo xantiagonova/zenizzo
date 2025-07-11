@@ -33,8 +33,7 @@
         .header { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0)); transition: background-color 0.3s; }
         .header.scrolled { background-color: var(--dark-bg); }
         .header-logo img { max-width: 150px; height: auto; cursor: pointer; }
-        .header-right { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 1rem 1.5rem; }
-        .main-nav { display: flex; align-items: center; gap: 1.5rem; }
+        .header-right { display: flex; align-items: center; justify-content: flex-end; gap: 1.5rem; }
         .main-nav a { color: var(--text-color); text-decoration: none; font-weight: 700; transition: color 0.3s; cursor: pointer; } .main-nav a:hover { color: #b3b3b3; }
         .social-icons { display: flex; align-items: center; gap: 1rem; } .social-icon { color: var(--text-color); font-size: 1.2rem; transition: color 0.3s, transform 0.3s; }
         .social-icon:hover { color: var(--gold-color); transform: scale(1.15); }
@@ -92,6 +91,17 @@
                 flex-direction: row;
             }
         }
+        #detail-image-container {
+            flex-shrink: 0;
+            width: 100%;
+            height: 50%;
+        }
+        @media (min-width: 768px) {
+            #detail-image-container {
+                width: 65%;
+                height: 100%;
+            }
+        }
         #detail-image-container img {
             width: 100%;
             height: 100%;
@@ -122,12 +132,12 @@
     <header class="header" id="main-header">
         <div class="header-logo"><img src="https://i.imgur.com/ZlWEt3M.png" alt="ZENIZZO Logo" id="logo-btn"></div>
         <div class="header-right">
-            <nav class="main-nav">
+            <nav class="main-nav hidden md:flex">
                 <a data-page="home-page">Inicio</a>
                 <a data-page="catalog-page">Catálogo</a>
                 <a data-page="videos-page">Videos</a>
             </nav>
-            <div class="social-icons">
+            <div class="social-icons hidden md:flex">
                 <a href="https://www.facebook.com/eddiesantiago.ruizgomez/" target="_blank" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/santiagoruiz_ac/" target="_blank" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.youtube.com/@santiagoruiz_ac" target="_blank" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -141,9 +151,25 @@
                     <button id="logout-btn" class="btn btn-danger">Cerrar Sesión</button>
                 </div>
             </div>
+            <button id="menu-btn" class="text-2xl md:hidden"><i class="fas fa-bars"></i></button>
         </div>
     </header>
     
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-dark-bg z-50 flex-col items-center justify-center">
+        <button id="close-menu-btn" class="absolute top-4 right-4 text-3xl">&times;</button>
+        <nav class="flex flex-col text-center gap-6">
+            <a data-page="home-page" class="text-2xl">Inicio</a>
+            <a data-page="catalog-page" class="text-2xl">Catálogo</a>
+            <a data-page="videos-page" class="text-2xl">Videos</a>
+        </nav>
+        <div class="social-icons flex mt-8 gap-6">
+            <a href="https://www.facebook.com/eddiesantiago.ruizgomez/" target="_blank" class="social-icon text-2xl" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/santiagoruiz_ac/" target="_blank" class="social-icon text-2xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@santiagoruiz_ac" target="_blank" class="social-icon text-2xl" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@santiagoruiz_ac" target="_blank" class="social-icon text-2xl" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+
     <main>
         <section id="home-page" class="page active">
             <div class="hero" id="hero-section">

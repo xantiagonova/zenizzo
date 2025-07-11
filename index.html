@@ -52,7 +52,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
+            background-size: 100%;
             background-position: center;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
@@ -61,13 +61,11 @@
         .hero-slide.active {
             opacity: 1;
             z-index: 2;
+            animation: zoom-in 15s ease-in-out forwards;
         }
-        .hero-slide.pan-down {
-            animation: pan-down 12s ease-in-out forwards;
-        }
-        @keyframes pan-down {
-            from { background-position: center 50%; }
-            to { background-position: center 60%; }
+        @keyframes zoom-in {
+            from { background-size: 100%; }
+            to { background-size: 110%; }
         }
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to top, var(--dark-bg), transparent); z-index: 3; }
         .content-section { padding: 3rem 0; } 
@@ -80,29 +78,21 @@
         .modal-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem; } .form-group { margin-bottom: 1.5rem; } .form-group label { display: block; margin-bottom: 0.5rem; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border-radius: 5px; border: 1px solid #555; background-color: var(--dark-bg); color: var(--text-color); }
         
-        #product-detail-modal .modal-content, #image-viewer-modal .modal-content {
+        #product-detail-modal .modal-content {
             max-width: 90vw;
             width: auto;
             height: 90vh;
             padding: 0;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         @media (min-width: 768px) {
             #product-detail-modal .modal-content {
                 flex-direction: row;
             }
         }
-        #detail-image-container, #image-viewer-container {
-            flex-shrink: 0;
-            width: 100%;
-            height: 50%;
-            md:width: 65%;
-            md:height: 100%;
-            background-color: black;
-        }
-        #image-viewer-container { width: 100%; height: 100%; }
-        #detail-image-container img, #viewer-image {
+        #detail-image-container img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -180,9 +170,9 @@
     <div id="auth-modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><form id="login-form"><h2 class="modal-title">Iniciar Sesión</h2><div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" required></div><button type="submit" class="btn btn-danger" style="width:100%;">Entrar</button></form></div></div>
     <div id="product-detail-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div id="detail-image-container"></div>
-            <div class="product-detail-text">
+            <div id="detail-image-container" class="w-full md:w-3/5 h-1/2 md:h-full flex-shrink-0 bg-black"></div>
+            <div class="product-detail-text w-full md:w-2/5 h-1/2 md:h-full">
+                <span class="close-modal">&times;</span>
                 <h2 id="detail-title" class="modal-title"></h2>
                 <p id="detail-description"></p>
                 <div id="detail-attributes"></div>
@@ -237,28 +227,15 @@
             const hero = $('#hero-section').empty();
             images.forEach((imgUrl, index) => {
                 const slide = $('<div/>', { class: 'hero-slide' }).css('background-image', `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${imgUrl})`);
-                if (index === 0) slide.addClass('active');
-                if (index >= images.length - 2) {
-                    slide.addClass('pan-down-effect');
-                }
+                if (index === 0) slide.addClass('active zoom-in');
                 hero.append(slide);
             });
 
             setInterval(() => {
                 const slides = $('.hero-slide');
-                const currentSlide = slides.eq(currentIndex);
-                if (currentSlide.hasClass('pan-down-effect')) {
-                    currentSlide.removeClass('pan-down');
-                }
-                currentSlide.removeClass('active');
+                slides.eq(currentIndex).removeClass('active zoom-in');
                 currentIndex = (currentIndex + 1) % slides.length;
-                const nextSlide = slides.eq(currentIndex);
-                nextSlide.addClass('active');
-                if (nextSlide.hasClass('pan-down-effect')) {
-                    nextSlide.removeClass('pan-down');
-                    void nextSlide[0].offsetWidth; 
-                    nextSlide.addClass('pan-down');
-                }
+                slides.eq(currentIndex).addClass('active zoom-in');
             }, 5000);
         }
 

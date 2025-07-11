@@ -80,21 +80,20 @@
         .modal-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem; } .form-group { margin-bottom: 1.5rem; } .form-group label { display: block; margin-bottom: 0.5rem; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border-radius: 5px; border: 1px solid #555; background-color: var(--dark-bg); color: var(--text-color); }
         
-        #product-detail-modal .modal-content {
+        #product-detail-modal .modal-content, #image-viewer-modal .modal-content {
             max-width: 90vw;
             width: auto;
             height: 90vh;
             padding: 0;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
         @media (min-width: 768px) {
             #product-detail-modal .modal-content {
                 flex-direction: row;
             }
         }
-        #detail-image-container {
+        #detail-image-container, #image-viewer-container {
             flex-shrink: 0;
             width: 100%;
             height: 50%;
@@ -106,7 +105,8 @@
                 height: 100%;
             }
         }
-        #detail-image-container img {
+        #image-viewer-container { width: 100%; height: 100%; }
+        #detail-image-container img, #viewer-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -164,6 +164,7 @@
                 <!-- El carrusel de imágenes se inyectará aquí -->
             </div>
             <div class="content-section"><div class="container"><h2 class="row-title">Nuestro Trabajo</h2><div id="latest-products-grid" class="product-grid justify-center"></div><div class="text-center mt-8"><a id="view-full-catalog-btn" class="btn btn-gold text-lg cursor-pointer">Ver Catálogo Completo</a></div></div></div>
+            <div class="content-section"><div class="container"><h2 class="row-title">Modificaciones</h2><div id="modifications-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></div></div>
             <div class="content-section bg-black bg-opacity-20 py-12">
                 <div class="container">
                     <h2 class="row-title">Videos Recientes</h2>
@@ -227,6 +228,10 @@
                 { id: 1, url: 'https://www.youtube.com/watch?v=FeP2lyQrxng' }, 
                 { id: 2, url: 'https://www.youtube.com/watch?v=oLrN_HVoOIg' }, 
                 { id: 3, url: 'https://www.youtube.com/watch?v=j40ORp75-ik' } 
+            ],
+            modifications: [
+                { id: 1, imageUrl: 'https://i.imgur.com/YrL9EXb.jpeg' },
+                { id: 2, imageUrl: 'https://i.imgur.com/Zkxq2WN.jpeg' }
             ]
         };
 
@@ -260,6 +265,12 @@
             homeProducts.forEach(p => renderProduct(p, '#latest-products-grid'));
             $('#latest-videos-grid').empty();
             latestVideos.forEach(v => renderVideo(v, '#latest-videos-grid'));
+            const modificationsGrid = $('#modifications-grid').empty();
+            db.modifications.forEach(m => {
+                const thumb = $('<div/>', { class: 'product-thumb' }).html(`<img src="${m.imageUrl}" alt="Modificación de acordeón">`);
+                thumb.on('click', () => showImageInModal(m.imageUrl));
+                modificationsGrid.append(thumb);
+            });
         }
 
         function renderCatalogPage() { $('#full-catalog-grid').empty(); db.products.forEach(p => renderProduct(p, '#full-catalog-grid')); }

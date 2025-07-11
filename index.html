@@ -80,7 +80,7 @@
         .modal-title { font-family: var(--font-title); font-size: 2rem; margin-bottom: 2rem; } .form-group { margin-bottom: 1.5rem; } .form-group label { display: block; margin-bottom: 0.5rem; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border-radius: 5px; border: 1px solid #555; background-color: var(--dark-bg); color: var(--text-color); }
         
-        #product-detail-modal .modal-content, #image-viewer-modal .modal-content {
+        #product-detail-modal .modal-content {
             max-width: 90vw;
             width: auto;
             height: 90vh;
@@ -93,7 +93,7 @@
                 flex-direction: row;
             }
         }
-        #detail-image-container, #image-viewer-container {
+        #detail-image-container {
             flex-shrink: 0;
             width: 100%;
             height: 50%;
@@ -105,8 +105,7 @@
                 height: 100%;
             }
         }
-        #image-viewer-container { width: 100%; height: 100%; }
-        #detail-image-container img, #viewer-image {
+        #detail-image-container img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -119,7 +118,7 @@
             flex-grow: 1;
         }
         #detail-title { font-size: 2rem; md:font-size: 2.5rem; margin-bottom: 1rem; } 
-        #detail-description { line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; } 
+        #detail-description { line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; white-space: pre-wrap; } 
         #whatsapp-producto-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; background-color: var(--whatsapp-color); color: white; width: 100%; }
         #detail-attributes { margin-top: 1.5rem; margin-bottom: 1.5rem; } .attribute-item { display: flex; align-items: center; margin-bottom: 0.5rem; } .attribute-label { width: 100px; font-weight: 700; }
         .attribute-bar-bg { flex-grow: 1; background-color: #444; border-radius: 5px; height: 10px; } .attribute-bar { background-color: var(--gold-color); height: 100%; border-radius: 5px; }
@@ -179,7 +178,7 @@
         </section>
         <section id="catalog-page" class="page"><div class="container"><h1 class="page-title">trabajos realizados</h1><div id="full-catalog-grid" class="product-grid"></div></div></section>
         <section id="videos-page" class="page"><div class="container"><h1 class="page-title">Demostraciones en Video</h1><div id="full-videos-grid" class="video-grid"></div></div></section>
-        <section id="admin-page" class="page"><div class="container"><div class="admin-tabs"><button class="tab-btn active" data-tab="products">Productos</button><button class="tab-btn" data-tab="videos">Videos</button></div><div id="tab-products" class="tab-content active"><h2>Gestionar Productos</h2><form id="product-form" class="admin-form"><input type="hidden" id="product-id"><div class="form-group"><label for="product-title">Título</label><input type="text" id="product-title" required></div><div class="form-group"><label for="product-description">Descripción</label><textarea id="product-description" rows="4" required></textarea></div><div class="form-group"><label for="product-category">Categoría</label><input type="text" id="product-category" required></div><div class="form-group"><label for="product-images">URLs de Imágenes (separadas por coma)</label><textarea id="product-images" required></textarea></div><div class="form-group"><label for="is-featured">Destacado</label><select id="is-featured"><option value="no">No</option><option value="yes">Sí</option></select></div><button type="submit" class="btn btn-gold">Guardar</button><button type="button" id="cancel-edit-product" class="btn btn-secondary" style="display:none;">Cancelar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-product-list"></div></div><div id="tab-videos" class="tab-content"><h2>Gestionar Videos</h2><form id="video-form" class="admin-form"><div class="form-group"><label for="video-url">URL YouTube</label><input type="text" id="video-url" required></div><button type="submit" class="btn btn-gold">Añadir</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-video-list"></div></div></div></section>
+        <section id="admin-page" class="page"><div class="container"><div class="admin-tabs"><button class="tab-btn active" data-tab="products">Productos</button><button class="tab-btn" data-tab="videos">Videos</button><button class="tab-btn" data-tab="modifications">Modificaciones</button></div><div id="tab-products" class="tab-content active"><h2>Gestionar Productos</h2><form id="product-form" class="admin-form"><input type="hidden" id="product-id"><div class="form-group"><label for="product-title">Título</label><input type="text" id="product-title" required></div><div class="form-group"><label for="product-description">Descripción</label><textarea id="product-description" rows="4" required></textarea></div><div class="form-group"><label for="product-category">Categoría</label><input type="text" id="product-category" required></div><div class="form-group"><label for="product-images">URLs de Imágenes (separadas por coma)</label><textarea id="product-images" required></textarea></div><div class="form-group"><label for="is-featured">Destacado</label><select id="is-featured"><option value="no">No</option><option value="yes">Sí</option></select></div><button type="submit" class="btn btn-gold">Guardar</button><button type="button" id="cancel-edit-product" class="btn btn-secondary" style="display:none;">Cancelar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-product-list"></div></div><div id="tab-videos" class="tab-content"><h2>Gestionar Videos</h2><form id="video-form" class="admin-form"><div class="form-group"><label for="video-url">URL YouTube</label><input type="text" id="video-url" required></div><button type="submit" class="btn btn-gold">Añadir</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-video-list"></div></div><div id="tab-modifications" class="tab-content"><h2>Gestionar Modificaciones</h2><form id="modification-form" class="admin-form"><input type="hidden" id="modification-id"><div class="form-group"><label for="modification-title">Título</label><input type="text" id="modification-title" required></div><div class="form-group"><label for="modification-description">Descripción</label><textarea id="modification-description" rows="4" required></textarea></div><div class="form-group"><label for="modification-image">URL de Imagen</label><input type="text" id="modification-image" required></div><button type="submit" class="btn btn-gold">Guardar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-modification-list"></div></div></div></section>
     </main>
     <footer class="footer"><p>&copy; 2025 ZENIZZO Accordions.</p></footer>
     <div id="auth-modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><form id="login-form"><h2 class="modal-title">Iniciar Sesión</h2><div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" required></div><button type="submit" class="btn btn-danger" style="width:100%;">Entrar</button></form></div></div>
@@ -230,8 +229,8 @@
                 { id: 3, url: 'https://www.youtube.com/watch?v=j40ORp75-ik' } 
             ],
             modifications: [
-                { id: 1, imageUrl: 'https://i.imgur.com/YrL9EXb.jpeg' },
-                { id: 2, imageUrl: 'https://i.imgur.com/Zkxq2WN.jpeg' }
+                { id: 1, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/YrL9EXb.jpeg'] },
+                { id: 2, title: 'Conversión a 34 Botones', description: 'Ampliamos el rango de tu acordeón con la instalación profesional de 34 botones.', imageUrls: ['https://i.imgur.com/Zkxq2WN.jpeg'] }
             ]
         };
 
@@ -266,11 +265,7 @@
             $('#latest-videos-grid').empty();
             latestVideos.forEach(v => renderVideo(v, '#latest-videos-grid'));
             const modificationsGrid = $('#modifications-grid').empty();
-            db.modifications.forEach(m => {
-                const thumb = $('<div/>', { class: 'product-thumb' }).html(`<img src="${m.imageUrl}" alt="Modificación de acordeón">`);
-                thumb.on('click', () => showImageInModal(m.imageUrl));
-                modificationsGrid.append(thumb);
-            });
+            db.modifications.forEach(m => renderProduct(m, modificationsGrid));
         }
 
         function renderCatalogPage() { $('#full-catalog-grid').empty(); db.products.forEach(p => renderProduct(p, '#full-catalog-grid')); }
@@ -296,25 +291,23 @@
 
         function renderAdminLists() {
             const productList = $('#admin-product-list').empty();
-            db.products.forEach(p => { $('<div/>', { class: 'admin-list-item' }).html(`<span>${p.title}</span><div><button class="btn btn-secondary btn-edit">Editar</button> <button class="btn btn-danger btn-delete">Eliminar</button></div>`).find('.btn-edit').on('click', () => editProduct(p.id)).end().find('.btn-delete').on('click', () => deleteItem('products', p.id)).end().appendTo(productList); });
+            db.products.forEach(p => { $('<div/>', { class: 'admin-list-item' }).html(`<span>${p.title}</span><div><button class="btn btn-secondary btn-edit">Editar</button> <button class="btn btn-danger btn-delete">Eliminar</button></div>`).find('.btn-edit').on('click', () => editProduct('products', p.id)).end().find('.btn-delete').on('click', () => deleteItem('products', p.id)).end().appendTo(productList); });
             const videoList = $('#admin-video-list').empty();
             db.videos.forEach(v => { $('<div/>', { class: 'admin-list-item' }).html(`<span>${v.url}</span><button class="btn btn-danger btn-delete">Eliminar</button>`).find('.btn-delete').on('click', () => deleteItem('videos', v.id)).end().appendTo(videoList); });
+            const modificationList = $('#admin-modification-list').empty();
+            db.modifications.forEach(m => { $('<div/>', { class: 'admin-list-item' }).html(`<span>${m.title}</span><div><button class="btn btn-secondary btn-edit">Editar</button> <button class="btn btn-danger btn-delete">Eliminar</button></div>`).find('.btn-edit').on('click', () => editProduct('modifications', m.id)).end().find('.btn-delete').on('click', () => deleteItem('modifications', m.id)).end().appendTo(modificationList); });
         }
 
-        $('#product-form').on('submit', function(e) {
-            e.preventDefault();
-            const id = parseInt($('#product-id').val());
-            const product = { title: $('#product-title').val(), description: $('#product-description').val(), category: $('#product-category').val(), imageUrls: $('#product-images').val().split(',').map(url => url.trim()), isFeatured: $('#is-featured').val() === 'yes', attributes: { Tono: 8, Respuesta: 8, Peso: 8, Proyección: 8 } };
-            if (id) { const index = db.products.findIndex(p => p.id === id); db.products[index] = { ...db.products[index], ...product }; } else { product.id = Date.now(); db.products.push(product); }
-            saveAndRerender(); this.reset(); $('#cancel-edit-product').hide();
-        });
+        $('#product-form').on('submit', function(e) { e.preventDefault(); const id = parseInt($('#product-id').val()); const product = { title: $('#product-title').val(), description: $('#product-description').val(), category: $('#product-category').val(), imageUrls: $('#product-images').val().split(',').map(url => url.trim()), isFeatured: $('#is-featured').val() === 'yes', attributes: { Tono: 8, Respuesta: 8, Peso: 8, Proyección: 8 } }; if (id) { const index = db.products.findIndex(p => p.id === id); db.products[index] = { ...db.products[index], ...product }; } else { product.id = Date.now(); db.products.push(product); } saveAndRerender(); this.reset(); $('#cancel-edit-product').hide(); });
+        $('#modification-form').on('submit', function(e) { e.preventDefault(); const id = parseInt($('#modification-id').val()); const mod = { title: $('#modification-title').val(), description: $('#modification-description').val(), imageUrls: [$('#modification-image').val()] }; if (id) { const index = db.modifications.findIndex(m => m.id === id); db.modifications[index] = { ...db.modifications[index], ...mod }; } else { mod.id = Date.now(); db.modifications.push(mod); } saveAndRerender(); this.reset(); });
 
-        function editProduct(id) {
-            const product = db.products.find(p => p.id === id);
-            $('#product-id').val(product.id); $('#product-title').val(product.title); $('#product-description').val(product.description);
-            $('#product-category').val(product.category); $('#product-images').val(product.imageUrls.join(', '));
-            $('#is-featured').val(product.isFeatured ? 'yes' : 'no'); $('#cancel-edit-product').show();
-            $('.tab-btn[data-tab="products"]').click();
+        function editProduct(type, id) {
+            const item = db[type].find(p => p.id === id);
+            if(type === 'products') {
+                $('#product-id').val(item.id); $('#product-title').val(item.title); $('#product-description').val(item.description); $('#product-category').val(item.category); $('#product-images').val(item.imageUrls.join(', ')); $('#is-featured').val(item.isFeatured ? 'yes' : 'no'); $('#cancel-edit-product').show(); $('.tab-btn[data-tab="products"]').click();
+            } else {
+                $('#modification-id').val(item.id); $('#modification-title').val(item.title); $('#modification-description').val(item.description); $('#modification-image').val(item.imageUrls[0]); $('.tab-btn[data-tab="modifications"]').click();
+            }
         }
         $('#cancel-edit-product').on('click', function() { $('#product-form')[0].reset(); $('#product-id').val(''); $(this).hide(); });
         $('#video-form').on('submit', function(e) { e.preventDefault(); db.videos.push({ id: Date.now(), url: $('#video-url').val() }); saveAndRerender(); this.reset(); });

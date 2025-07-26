@@ -20,9 +20,6 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
     <style>
         :root { --gold-color: #D4AF37; --dark-bg: #141414; --light-bg: #222; --text-color: #fff; --font-title: 'Oswald', sans-serif; --font-body: 'Montserrat', sans-serif; --danger-color: #e50914; --whatsapp-color: #25D366; }
         * { margin: 0; padding: 0; box-sizing: border-box; } html { scroll-behavior: smooth; } 
@@ -87,6 +84,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         @media (min-width: 768px) {
             #product-detail-modal .modal-content {
@@ -163,7 +161,7 @@
                 <!-- El carrusel de imágenes se inyectará aquí -->
             </div>
             <div class="content-section"><div class="container"><h2 class="row-title">Nuestro Trabajo</h2><div id="latest-products-grid" class="product-grid justify-center"></div><div class="text-center mt-8"><a id="view-full-catalog-btn" class="btn btn-gold text-lg cursor-pointer">Ver Catálogo Completo</a></div></div></div>
-            <div class="content-section"><div class="container"><h2 class="row-title">Modificaciones</h2><div id="modifications-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></div></div>
+            <div class="content-section"><div class="container"><h2 class="row-title">🔧 MODIFICACIONES ZENIZZO 🎹</h2><div id="modifications-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></div></div>
             <div class="content-section bg-black bg-opacity-20 py-12">
                 <div class="container">
                     <h2 class="row-title">Videos Recientes</h2>
@@ -194,16 +192,9 @@
             </div>
         </div>
     </div>
-    <div id="image-viewer-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div id="image-viewer-container" class="w-full h-full">
-                 <img id="viewer-image" src="" alt="Imagen ampliada" class="max-w-full max-h-full">
-            </div>
-        </div>
-    </div>
     <a id="whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
     
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
     $(document).ready(function() {
         const ADMIN_PASSWORD = "admin";
@@ -213,9 +204,11 @@
 
         let db = {
             products: [
-                { id: 1, title: 'ZENIZZO Imperial', category: 'Profesional', imageUrls: ['https://i.imgur.com/0WYbMjE.jpeg'], description: 'El pináculo del sonido vallenato.', isFeatured: false, attributes: { Tono: 9, Respuesta: 10, Peso: 7, Proyección: 9 }, showOnHome: true },
-                { id: 2, title: 'ZENIZZO Compadre', category: 'Estudiante', imageUrls: ['https://i.imgur.com/6OTeoCT.png'], description: 'Ideal para iniciar en el mundo del vallenato.', isFeatured: false, attributes: { Tono: 6, Respuesta: 7, Peso: 9, Proyección: 6 }, showOnHome: true },
-                { id: 3, title: 'Acordeón de Batalla', category: 'Estudiante', imageUrls: ['https://i.imgur.com/LL4hiRQ.jpeg'], description: 'Robusto y confiable para largas jornadas de práctica.', isFeatured: false, attributes: { Tono: 7, Respuesta: 7, Peso: 8, Proyección: 6 }, showOnHome: true },
+                { id: 10, title: 'Acordeón Negro Mate', category: 'Profesional', imageUrls: ['https://i.imgur.com/93ExBqo.jpeg'], description: 'Un acabado moderno y elegante con un sonido profundo y resonante.', isFeatured: false, attributes: { Tono: 8, Respuesta: 8, Peso: 7, Proyección: 8 } },
+                { id: 11, title: 'Acordeón Rojo Clásico', category: 'Estudiante', imageUrls: ['https://i.imgur.com/vRmhUns.jpeg'], description: 'El instrumento perfecto para destacar en el escenario.', isFeatured: false, attributes: { Tono: 7, Respuesta: 7, Peso: 8, Proyección: 7 } },
+                { id: 1, title: 'ZENIZZO Imperial', category: 'Profesional', imageUrls: ['https://i.imgur.com/0WYbMjE.jpeg'], description: 'El pináculo del sonido vallenato.', isFeatured: false, attributes: { Tono: 9, Respuesta: 10, Peso: 7, Proyección: 9 } },
+                { id: 2, title: 'ZENIZZO Compadre', category: 'Estudiante', imageUrls: ['https://i.imgur.com/6OTeoCT.png'], description: 'Ideal para iniciar en el mundo del vallenato.', isFeatured: false, attributes: { Tono: 6, Respuesta: 7, Peso: 9, Proyección: 6 } },
+                { id: 3, title: 'Acordeón de Batalla', category: 'Estudiante', imageUrls: ['https://i.imgur.com/LL4hiRQ.jpeg'], description: 'Robusto y confiable para largas jornadas de práctica.', isFeatured: false, attributes: { Tono: 7, Respuesta: 7, Peso: 8, Proyección: 6 } },
                 { id: 4, title: 'ZENIZZO Piatanesi', category: 'Colección', imageUrls: ['https://i.imgur.com/3HITeOO.jpeg'], description: 'Sonido clásico y nostálgico.', isFeatured: false, attributes: { Tono: 10, Respuesta: 8, Peso: 6, Proyección: 7 } },
                 { id: 5, title: 'Acordeón Rojo Pasión', category: 'Profesional', imageUrls: ['https://i.imgur.com/Qpon8Fs.jpeg'], description: 'Un diseño vibrante con un sonido potente.', isFeatured: false, attributes: { Tono: 8, Respuesta: 9, Peso: 8, Proyección: 8 } },
                 { id: 6, title: 'Acordeón Blanco Perla', category: 'Profesional', imageUrls: ['https://i.imgur.com/aovEItm.jpeg'], description: 'Elegancia y claridad en cada nota.', isFeatured: false, attributes: { Tono: 9, Respuesta: 8, Peso: 8, Proyección: 9 } },
@@ -230,7 +223,7 @@
             ],
             modifications: [
                 { id: 1, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/YrL9EXb.jpeg'] },
-                { id: 2, title: 'Conversión a 34 Botones', description: 'Ampliamos el rango de tu acordeón con la instalación profesional de 34 botones.', imageUrls: ['https://i.imgur.com/Zkxq2WN.jpeg'] }
+                { id: 2, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/Zkxq2WN.jpeg'] }
             ]
         };
 
@@ -258,7 +251,7 @@
         }
 
         function renderHomePage() {
-            const homeProducts = db.products.filter(p => p.showOnHome === true);
+            const homeProducts = db.products.slice(0, 3);
             const latestVideos = db.videos.slice(-3).reverse();
             $('#latest-products-grid').empty();
             homeProducts.forEach(p => renderProduct(p, '#latest-products-grid'));
@@ -333,11 +326,6 @@
             $('#product-detail-modal').fadeIn();
         }
         
-        function showImageInModal(imageUrl) {
-            $('#viewer-image').attr('src', imageUrl);
-            $('#image-viewer-modal').fadeIn();
-        }
-
         loadDatabase(); renderAll(); checkAuth();
         $('#whatsapp-flotante').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`);
         $('#youtube-channel-link').attr('href', YOUTUBE_CHANNEL_URL);

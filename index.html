@@ -83,46 +83,39 @@
         #product-detail-modal .modal-content {
             max-width: 90vw;
             width: auto;
-            height: 90vh;
-            padding: 0;
+            max-height: 90vh;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-        }
-        @media (min-width: 768px) {
-            #product-detail-modal .modal-content {
-                flex-direction: row;
-            }
+            background-color: transparent;
         }
         #detail-image-container {
-            flex-shrink: 0;
+            flex-grow: 1;
             width: 100%;
-            height: 50%;
-            background-color: black;
-        }
-        @media (min-width: 768px) {
-            #detail-image-container {
-                width: 65%;
-                height: 100%;
-            }
+            margin-bottom: 1rem;
+            min-height: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         #detail-image-container img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
+            border-radius: 8px;
         }
-        .product-detail-text {
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            overflow-y: auto;
-            flex-grow: 1;
+        #whatsapp-producto-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 0.7rem; 
+            background-color: var(--whatsapp-color); 
+            color: white; 
+            width: auto; 
+            margin: 0 auto;
+            flex-shrink: 0;
         }
-        #detail-title { font-size: 2rem; md:font-size: 2.5rem; margin-bottom: 1rem; } 
-        #detail-description { line-height: 1.7; margin-bottom: 1.5rem; flex-grow: 1; white-space: pre-wrap; } 
-        #whatsapp-producto-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; background-color: var(--whatsapp-color); color: white; width: 100%; }
-        #detail-attributes { margin-top: 1.5rem; margin-bottom: 1.5rem; } .attribute-item { display: flex; align-items: center; margin-bottom: 0.5rem; } .attribute-label { width: 100px; font-weight: 700; }
-        .attribute-bar-bg { flex-grow: 1; background-color: #444; border-radius: 5px; height: 10px; } .attribute-bar { background-color: var(--gold-color); height: 100%; border-radius: 5px; }
         
         #admin-page { background-color: var(--dark-bg); } #admin-page .container { padding-top: 8rem; } .admin-tabs { display: flex; border-bottom: 1px solid #555; margin-bottom: 2rem; overflow-x: auto; }
         .tab-btn { padding: 1rem; white-space: nowrap; cursor: pointer; background: none; border: none; color: #888; font-size: 1.2rem; font-family: var(--font-title); } .tab-btn.active { color: var(--gold-color); border-bottom: 3px solid var(--gold-color); }
@@ -169,35 +162,25 @@
                 <div class="container">
                     <h2 class="row-title">Videos Recientes</h2>
                     <div id="latest-videos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+                    <div class="text-center mt-8">
+                        <a href="https://www.youtube.com/@santiagoruiz_ac" id="youtube-channel-link" target="_blank" class="btn btn-gold text-lg inline-flex items-center gap-2">
+                            Visita Nuestro Canal de YouTube <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
         <section id="catalog-page" class="page"><div class="container"><h1 class="page-title">trabajos realizados</h1><div id="full-catalog-grid" class="product-grid"></div></div></section>
-        <section id="videos-page" class="page">
-            <div class="container">
-                <h1 class="page-title">Demostraciones en Video</h1>
-                <div id="full-videos-grid" class="video-grid"></div>
-                <div class="text-center mt-12">
-                    <a href="https://www.youtube.com/@santiagoruiz_ac" id="youtube-channel-link" target="_blank" class="btn btn-gold text-lg inline-flex items-center gap-2">
-                        Visita Nuestro Canal de YouTube <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
+        <section id="videos-page" class="page"><div class="container"><h1 class="page-title">Demostraciones en Video</h1><div id="full-videos-grid" class="video-grid"></div></div></section>
         <section id="admin-page" class="page"><div class="container"><div class="admin-tabs"><button class="tab-btn active" data-tab="products">Productos</button><button class="tab-btn" data-tab="videos">Videos</button><button class="tab-btn" data-tab="modifications">Modificaciones</button></div><div id="tab-products" class="tab-content active"><h2>Gestionar Productos</h2><form id="product-form" class="admin-form"><input type="hidden" id="product-id"><div class="form-group"><label for="product-title">Título</label><input type="text" id="product-title" required></div><div class="form-group"><label for="product-description">Descripción</label><textarea id="product-description" rows="4" required></textarea></div><div class="form-group"><label for="product-category">Categoría</label><input type="text" id="product-category" required></div><div class="form-group"><label for="product-images">URLs de Imágenes (separadas por coma)</label><textarea id="product-images" required></textarea></div><div class="form-group"><label for="is-featured">Destacado</label><select id="is-featured"><option value="no">No</option><option value="yes">Sí</option></select></div><button type="submit" class="btn btn-gold">Guardar</button><button type="button" id="cancel-edit-product" class="btn btn-secondary" style="display:none;">Cancelar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-product-list"></div></div><div id="tab-videos" class="tab-content"><h2>Gestionar Videos</h2><form id="video-form" class="admin-form"><div class="form-group"><label for="video-url">URL YouTube</label><input type="text" id="video-url" required></div><button type="submit" class="btn btn-gold">Añadir</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-video-list"></div></div><div id="tab-modifications" class="tab-content"><h2>Gestionar Modificaciones</h2><form id="modification-form" class="admin-form"><input type="hidden" id="modification-id"><div class="form-group"><label for="modification-title">Título</label><input type="text" id="modification-title" required></div><div class="form-group"><label for="modification-description">Descripción</label><textarea id="modification-description" rows="4" required></textarea></div><div class="form-group"><label for="modification-image">URL de Imagen</label><input type="text" id="modification-image" required></div><button type="submit" class="btn btn-gold">Guardar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-modification-list"></div></div></div></section>
     </main>
     <footer class="footer"><p>&copy; 2025 ZENIZZO Accordions.</p></footer>
     <div id="auth-modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><form id="login-form"><h2 class="modal-title">Iniciar Sesión</h2><div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" required></div><button type="submit" class="btn btn-danger" style="width:100%;">Entrar</button></form></div></div>
     <div id="product-detail-modal" class="modal">
         <div class="modal-content">
-            <div id="detail-image-container" class="w-full md:w-3/5 h-1/2 md:h-full flex-shrink-0 bg-black"></div>
-            <div class="product-detail-text w-full md:w-2/5 h-1/2 md:h-full">
-                <span class="close-modal">&times;</span>
-                <h2 id="detail-title" class="modal-title"></h2>
-                <p id="detail-description"></p>
-                <div id="detail-attributes"></div>
-                <a id="whatsapp-producto-btn" class="btn" target="_blank"><i class="fab fa-whatsapp"></i> Contactar</a>
-            </div>
+            <span class="close-modal">&times;</span>
+            <div id="detail-image-container"></div>
+            <a id="whatsapp-producto-btn" class="btn mt-4" target="_blank"><i class="fab fa-whatsapp"></i> Contactar sobre este trabajo</a>
         </div>
     </div>
     <a id="whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -345,26 +328,12 @@
         $('.tab-btn').on('click', function() { $('.tab-btn').removeClass('active'); $(this).addClass('active'); $('.tab-content').removeClass('active'); $('#' + $(this).data('tab')).addClass('active'); });
         
         function showProductDetail(product) {
-            $('#detail-title').text(product.title);
-            $('#detail-description').text(product.description);
             $('#detail-image-container').html(`<img src="${product.imageUrls[0]}" alt="${product.title}">`);
-            const attributesContainer = $('#detail-attributes').empty();
-            if (product.attributes) {
-                for (const [key, value] of Object.entries(product.attributes)) {
-                    const attributeHtml = `<div class="attribute-item"><span class="attribute-label">${key}</span><div class="attribute-bar-bg"><div class="attribute-bar" style="width: ${value * 10}%"></div></div></div>`;
-                    attributesContainer.append(attributeHtml);
-                }
-            }
-            const productMessage = `Hola, estoy interesado en el acordeón "${product.title}".`;
+            const productMessage = `Hola, estoy interesado en el trabajo "${product.title}".`;
             $('#whatsapp-producto-btn').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(productMessage)}`);
             $('#product-detail-modal').fadeIn();
         }
         
-        function showImageInModal(imageUrl) {
-            $('#viewer-image').attr('src', imageUrl);
-            $('#image-viewer-modal').fadeIn();
-        }
-
         loadDatabase(); renderAll(); checkAuth();
         $('#whatsapp-flotante').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`);
         $('#youtube-channel-link').attr('href', YOUTUBE_CHANNEL_URL);

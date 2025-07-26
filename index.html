@@ -20,6 +20,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <style>
         :root { --gold-color: #D4AF37; --dark-bg: #141414; --light-bg: #222; --text-color: #fff; --font-title: 'Oswald', sans-serif; --font-body: 'Montserrat', sans-serif; --danger-color: #e50914; --whatsapp-color: #25D366; }
         * { margin: 0; padding: 0; box-sizing: border-box; } html { scroll-behavior: smooth; } 
@@ -166,16 +169,21 @@
                 <div class="container">
                     <h2 class="row-title">Videos Recientes</h2>
                     <div id="latest-videos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
-                    <div class="text-center mt-8">
-                        <a href="https://www.youtube.com/@santiagoruiz_ac" id="youtube-channel-link" target="_blank" class="btn btn-gold text-lg inline-flex items-center gap-2">
-                            Visita Nuestro Canal de YouTube <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
         <section id="catalog-page" class="page"><div class="container"><h1 class="page-title">trabajos realizados</h1><div id="full-catalog-grid" class="product-grid"></div></div></section>
-        <section id="videos-page" class="page"><div class="container"><h1 class="page-title">Demostraciones en Video</h1><div id="full-videos-grid" class="video-grid"></div></div></section>
+        <section id="videos-page" class="page">
+            <div class="container">
+                <h1 class="page-title">Demostraciones en Video</h1>
+                <div id="full-videos-grid" class="video-grid"></div>
+                <div class="text-center mt-12">
+                    <a href="https://www.youtube.com/@santiagoruiz_ac" id="youtube-channel-link" target="_blank" class="btn btn-gold text-lg inline-flex items-center gap-2">
+                        Visita Nuestro Canal de YouTube <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
         <section id="admin-page" class="page"><div class="container"><div class="admin-tabs"><button class="tab-btn active" data-tab="products">Productos</button><button class="tab-btn" data-tab="videos">Videos</button><button class="tab-btn" data-tab="modifications">Modificaciones</button></div><div id="tab-products" class="tab-content active"><h2>Gestionar Productos</h2><form id="product-form" class="admin-form"><input type="hidden" id="product-id"><div class="form-group"><label for="product-title">Título</label><input type="text" id="product-title" required></div><div class="form-group"><label for="product-description">Descripción</label><textarea id="product-description" rows="4" required></textarea></div><div class="form-group"><label for="product-category">Categoría</label><input type="text" id="product-category" required></div><div class="form-group"><label for="product-images">URLs de Imágenes (separadas por coma)</label><textarea id="product-images" required></textarea></div><div class="form-group"><label for="is-featured">Destacado</label><select id="is-featured"><option value="no">No</option><option value="yes">Sí</option></select></div><button type="submit" class="btn btn-gold">Guardar</button><button type="button" id="cancel-edit-product" class="btn btn-secondary" style="display:none;">Cancelar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-product-list"></div></div><div id="tab-videos" class="tab-content"><h2>Gestionar Videos</h2><form id="video-form" class="admin-form"><div class="form-group"><label for="video-url">URL YouTube</label><input type="text" id="video-url" required></div><button type="submit" class="btn btn-gold">Añadir</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-video-list"></div></div><div id="tab-modifications" class="tab-content"><h2>Gestionar Modificaciones</h2><form id="modification-form" class="admin-form"><input type="hidden" id="modification-id"><div class="form-group"><label for="modification-title">Título</label><input type="text" id="modification-title" required></div><div class="form-group"><label for="modification-description">Descripción</label><textarea id="modification-description" rows="4" required></textarea></div><div class="form-group"><label for="modification-image">URL de Imagen</label><input type="text" id="modification-image" required></div><button type="submit" class="btn btn-gold">Guardar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-modification-list"></div></div></div></section>
     </main>
     <footer class="footer"><p>&copy; 2025 ZENIZZO Accordions.</p></footer>
@@ -194,7 +202,6 @@
     </div>
     <a id="whatsapp-flotante" target="_blank"><i class="fab fa-whatsapp"></i></a>
     
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
     $(document).ready(function() {
         const ADMIN_PASSWORD = "admin";
@@ -217,9 +224,14 @@
                 { id: 9, title: 'Acordeón Compacto', category: 'Estudiante', imageUrls: ['https://i.imgur.com/akm1hJZ.jpeg'], description: 'Ligero y versátil, ideal para viajar y aprender.', isFeatured: false, attributes: { Tono: 6, Respuesta: 6, Peso: 10, Proyección: 5 } }
             ],
             videos: [ 
-                { id: 1, url: 'https://www.youtube.com/watch?v=FeP2lyQrxng' }, 
-                { id: 2, url: 'https://www.youtube.com/watch?v=oLrN_HVoOIg' }, 
-                { id: 3, url: 'https://www.youtube.com/watch?v=j40ORp75-ik' } 
+                { id: 1, url: 'https://youtu.be/TLHAkAVzgZM?si=4Tfc_4Mrfiv2kfAe' },
+                { id: 2, url: 'https://youtu.be/3I3G6Er79fI?si=sarVRlriylCGi3RU' },
+                { id: 3, url: 'https://youtu.be/QeaPZiM_x18?si=fqVho1k0QCm6Y881' },
+                { id: 4, url: 'https://youtu.be/7u0-9cgrQFE?si=rglUc0lv_Hy9OSB9' },
+                { id: 5, url: 'https://youtu.be/OCpbht9v3OA?si=g7p2a5_lxEKy6J_C' },
+                { id: 6, url: 'https://www.youtube.com/shorts/YGg-aD_4fBM' },
+                { id: 7, url: 'https://www.youtube.com/shorts/D0P1JrbNUDo' },
+                { id: 8, url: 'https://www.youtube.com/shorts/3u33lqzzWgw' }
             ],
             modifications: [
                 { id: 1, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/YrL9EXb.jpeg'] },
@@ -269,7 +281,29 @@
             thumb.on('click', () => showProductDetail(product));
             $(container).append(thumb);
         }
-        function renderVideo(video, container) { try { const videoId = new URL(video.url).searchParams.get('v'); if (videoId) { $('<div/>', { class: 'video-player' }).html(`<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`).appendTo(container); } } catch (e) { console.error("URL de video inválida:", video.url); } }
+        
+        function getYoutubeId(url) {
+            let ID = '';
+            url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/|\/shorts\/)/);
+            if (url[2] !== undefined) {
+                ID = url[2].split(/[^0-9a-z_\-]/i);
+                ID = ID[0];
+            } else {
+                ID = url;
+            }
+            return ID;
+        }
+
+        function renderVideo(video, container) { 
+            try { 
+                const videoId = getYoutubeId(video.url);
+                if (videoId) { 
+                    $('<div/>', { class: 'video-player' }).html(`<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`).appendTo(container); 
+                } 
+            } catch (e) { 
+                console.error("URL de video inválida:", video.url); 
+            } 
+        }
 
         function showPage(pageId) { $('.page').removeClass('active'); $('#' + pageId).addClass('active'); $(window).scrollTop(0); }
         $('[data-page]').on('click', function() { showPage($(this).data('page')); });
@@ -326,6 +360,11 @@
             $('#product-detail-modal').fadeIn();
         }
         
+        function showImageInModal(imageUrl) {
+            $('#viewer-image').attr('src', imageUrl);
+            $('#image-viewer-modal').fadeIn();
+        }
+
         loadDatabase(); renderAll(); checkAuth();
         $('#whatsapp-flotante').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`);
         $('#youtube-channel-link').attr('href', YOUTUBE_CHANNEL_URL);

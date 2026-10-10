@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737687010034714"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -74,7 +75,7 @@
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to top, var(--dark-bg), transparent); z-index: 3; }
         .content-section { padding: 3rem 0; } 
         #home-page .content-section:first-of-type { margin-top: 0; }
-        .page-title { font-family: var(--font-title); font-size: 2.5rem; md:font-size: 3rem; margin-bottom: 2rem; padding-top: 8rem; } .row-title { font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .page-title { font-family: var(--font-title); font-size: 2.5rem;  margin-bottom: 2rem; padding-top: 8rem; } .row-title { font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 1.5rem; }
         .product-grid, .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; } .product-thumb { border-radius: 5px; overflow: hidden; cursor: pointer; transition: transform 0.3s; position: relative; }
         .product-thumb:hover { transform: scale(1.05); } .product-thumb img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; } .video-player iframe { width: 100%; height: auto; aspect-ratio: 16/9; border: none; border-radius: 5px; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; padding: 1rem; }
@@ -121,7 +122,7 @@
         
         #admin-page { background-color: var(--dark-bg); } #admin-page .container { padding-top: 8rem; } .admin-tabs { display: flex; border-bottom: 1px solid #555; margin-bottom: 2rem; overflow-x: auto; }
         .tab-btn { padding: 1rem; white-space: nowrap; cursor: pointer; background: none; border: none; color: #888; font-size: 1.2rem; font-family: var(--font-title); } .tab-btn.active { color: var(--gold-color); border-bottom: 3px solid var(--gold-color); }
-        .tab-content { display: none; } .tab-content.active { display: block; } .admin-list-item { display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; align-items: flex-start; sm:align-items: center; background: var(--light-bg); padding: 1rem; border-radius: 5px; margin-bottom: 1rem; gap: 1rem; }
+        .tab-content { display: none; } .tab-content.active { display: block; } .admin-list-item { display: flex; flex-direction: column;  justify-content: space-between; align-items: flex-start;  background: var(--light-bg); padding: 1rem; border-radius: 5px; margin-bottom: 1rem; gap: 1rem; }
         .admin-list-item .btn { padding: 0.5rem 1rem; } .footer { text-align: center; padding: 3rem 0; margin-top: 2rem; opacity: 0.6; }
         #whatsapp-flotante { position: fixed; bottom: 25px; right: 25px; background-color: var(--whatsapp-color); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1001; text-decoration: none; transition: transform 0.3s; }
         #whatsapp-flotante:hover { transform: scale(1.1); }
@@ -211,11 +212,186 @@
             .page-title { padding-top:8rem; }
         }
 
+
+        /* Fondo ZENIZZO: imagen a pantalla completa con movimiento suave. */
+        body { isolation: isolate; }
+        body::before {
+            inset: -45px;
+            z-index: -1;
+            opacity: .85;
+            background-image: url("https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/fondozenizzo.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            mask-image: none;
+            -webkit-mask-image: none;
+            animation: zenizzo-watermark-drift 32s ease-in-out infinite alternate;
+        }
+        #admin-page { background-color: transparent; }
+        @keyframes zenizzo-watermark-drift {
+            from { transform: translate3d(-16px, -12px, 0); }
+            to { transform: translate3d(16px, 12px, 0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body::before { animation: none; transform: none; }
+        }
+        .video-preview { position:relative; display:block; aspect-ratio:16/9; color:#fff; }
+        .video-preview img { width:100%; height:100%; object-fit:cover; }
+        .video-play-label { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); padding:.8rem 1rem; border-radius:999px; background:rgba(0,0,0,.8); white-space:nowrap; font-size:.85rem; }
+        .video-watch-link { display:block; padding:.8rem 1rem; color:var(--gold-soft); text-align:center; font-size:.85rem; text-decoration:none; }
+        .video-watch-link:hover { background:rgba(255,255,255,.07); }
+
+        .modifications-intro { max-width:800px; margin-bottom:2.2rem; }
+        .modifications-eyebrow { color:var(--gold-soft); font-size:.7rem; letter-spacing:.18em; margin-bottom:1rem; }
+        .modifications-intro h3 { font-family:var(--font-title); font-size:clamp(2.3rem,4.5vw,4rem); line-height:1.08; margin-bottom:1.3rem; }
+        .modifications-intro h3 span { color:var(--gold-soft); }
+        .modifications-intro > p:last-child { max-width:680px; color:#d4d0c8; line-height:1.8; }
+        .modification-services { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-bottom:2rem; }
+        .modification-service { padding:clamp(1.3rem,2.5vw,2rem); border:1px solid var(--line); border-radius:18px; background:rgba(12,13,15,.88); }
+        .service-number { color:var(--gold-soft); font-size:.7rem; letter-spacing:.13em; }
+        .modification-service h4 { font-family:var(--font-title); font-size:1.65rem; line-height:1.2; margin:1rem 0; }
+        .modification-service p,.modification-service ul { font-size:.93rem; color:#d4d0c8; line-height:1.85; }
+        .modification-service ul { list-style:disc; padding-left:1.1rem; }
+        .modifications-cta { display:flex; align-items:center; justify-content:space-between; gap:1.8rem; padding:2rem 0 0; margin-top:1rem; }
+        .modifications-cta h3 { font-family:var(--font-title); font-size:clamp(1.6rem,2.5vw,2rem); margin-bottom:.6rem; }
+        .modifications-cta p { color:#d4d0c8; font-size:.93rem; line-height:1.7; }
+        #quote-modification-btn { flex-shrink:0; text-align:center; }
+        #quote-modification-btn:focus-visible { outline:2px solid white; outline-offset:5px; }
+        @media (max-width:900px) { .modification-services { grid-template-columns:1fr; } .modifications-cta { flex-direction:column; align-items:flex-start; } }
+        @media (max-width:560px) { #quote-modification-btn { width:100%; } }
+        /* Conservar el ancho de las tarjetas de Nuestro trabajo con solo dos imágenes. */
+        #modifications-grid { grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); }
+        @media (max-width:900px) {
+            #modifications-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        }
+        .modification-video-card { aspect-ratio:4/3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.7rem; padding:1rem; text-align:center; text-decoration:none; color:var(--text-color); background:linear-gradient(145deg,#22201a,#101113 70%); }
+        .modification-video-card::after { display:none; }
+        .modification-video-platform { font-size:.6rem; letter-spacing:.15em; color:var(--muted); }
+        .modification-video-play { display:grid; place-items:center; width:48px; height:48px; border-radius:50%; border:1px solid var(--gold-color); color:var(--gold-soft); background:rgba(215,180,90,.08); }
+        .modification-video-title { font-family:var(--font-title); font-size:1rem; line-height:1.2; }
+        .modification-video-action { color:var(--gold-soft); font-size:.75rem; }
+        .modification-video-card:focus-visible { outline:2px solid var(--gold-soft); outline-offset:4px; }
+        @media (max-width:560px) {
+            .modification-video-card { gap:.35rem; padding:.6rem; }
+            .modification-video-platform { font-size:.5rem; }
+            .modification-video-play { width:30px; height:30px; font-size:.7rem; }
+            .modification-video-title { font-size:.8rem; }
+            .modification-video-action { font-size:.65rem; }
+        }
+        #keyboard-modifications-grid { grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); }
+        .facebook-embed-card { aspect-ratio:4/3; display:flex; flex-direction:column; min-width:0; background:#08090b; }
+        .facebook-embed-card::after { display:none; }
+        .facebook-embed-card:hover { transform:none; }
+        .facebook-embed-card iframe { display:block; width:100%; height:0; flex:1 1 auto; min-height:0; border:0; }
+        .facebook-video-fallback { flex:0 0 28px; display:flex; align-items:center; justify-content:center; color:var(--gold-soft); font-size:.65rem; text-decoration:none; background:#111214; }
+        .facebook-video-fallback:hover { text-decoration:underline; }
+        #quote-keyboard-modification-btn { flex-shrink:0; text-align:center; }
+        @media (max-width:900px) { #keyboard-modifications-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        @media (max-width:560px) { #quote-keyboard-modification-btn { width:100%; } }
+        .our-work-story { max-width:900px; margin:0 auto; padding:clamp(1.4rem,4vw,3rem); background:#111214; border:1px solid rgba(215,180,90,.24); border-radius:20px; box-shadow:0 18px 50px rgba(0,0,0,.3); }
+        .our-work-story h3 { font-family:var(--font-title); font-size:clamp(1.65rem,3vw,2.65rem); line-height:1.2; color:var(--gold-soft); margin-bottom:1.5rem; }
+        .our-work-story p { font-size:clamp(.95rem,1.15vw,1.05rem); line-height:1.9; color:#ddd8ce; margin-bottom:1.25rem; }
+        .our-work-story strong { color:var(--text-color); font-weight:700; }
+        .our-work-story .our-work-signature { color:var(--gold-soft); font-weight:700; margin-top:1.7rem; text-align:center; }
+        .our-work-logo { display:flex; justify-content:center; padding:1.4rem 0 3rem; }
+        .our-work-logo img { display:block; width:clamp(220px,38vw,420px); max-width:90%; height:auto; object-fit:contain; }
+        .footer-brand-link { display:inline-flex; flex-direction:column; align-items:center; gap:.65rem; max-width:100%; padding:0 1.25rem; color:var(--text-color); text-decoration:none; }
+        .footer-brand-name { font-family:var(--font-title); font-size:1.4rem; letter-spacing:.12em; color:var(--gold-soft); }
+        .footer-brand-tagline { font-size:.9rem; line-height:1.7; }
+        .footer-copyright { font-size:.72rem; color:var(--muted); line-height:1.6; }
+        .footer-brand-link:hover .footer-brand-name { color:#fff; }
+        .footer-brand-link:focus-visible { outline:2px solid var(--gold-soft); outline-offset:8px; border-radius:6px; }
+
+        /* Responsive layout: shared card widths and measured navigation height. */
+        :root { --header-height:88px; }
+        html { scroll-padding-top:calc(var(--header-height) + 16px); }
+        body { min-width:0; overflow-wrap:break-word; }
+        img,video { max-width:100%; }
+        .container { width:100%; }
+        .header { gap:1rem; align-items:center; padding-top:max(.75rem,env(safe-area-inset-top)); }
+        .header-logo { flex:0 0 auto; }
+        .header-logo img { display:block; width:142px; }
+        .header-right { min-width:0; gap:.6rem; }
+        .main-nav { flex-wrap:wrap; }
+        .main-nav a,.social-icon,.close-modal,.btn { min-height:44px; }
+        .main-nav a { display:inline-flex; align-items:center; justify-content:center; }
+        .social-icon { width:44px; }
+        .btn { max-width:100%; white-space:normal; line-height:1.45; text-align:center; }
+        .hero { min-height:0; height:clamp(340px,78svh,880px); }
+        .hero::before { font-size:clamp(.6rem,1.1vw,.85rem); max-width:90%; bottom:2rem; }
+        .page-title { padding-top:calc(var(--header-height) + 2.5rem); overflow-wrap:anywhere; }
+        #admin-page .container { padding-top:calc(var(--header-height) + 2rem); }
+        .row-title,.modifications-intro h3,.our-work-story h3 { overflow-wrap:anywhere; }
+        .product-grid,#modifications-grid,#keyboard-modifications-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.15rem; align-items:start; }
+        .product-thumb { min-width:0; width:100%; aspect-ratio:4/3; }
+        .product-thumb img { display:block; width:100%; height:100%; object-fit:cover; }
+        .video-grid,#latest-videos-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+        .video-player { min-width:0; }
+        .video-player iframe { display:block; width:100%; height:auto; aspect-ratio:16/9; }
+        .modification-service { min-width:0; }
+        .modifications-cta > div { min-width:0; }
+        .modal { z-index:2000; overflow-y:auto; overscroll-behavior:contain; padding: max(1rem,env(safe-area-inset-top)) 1rem max(1rem,env(safe-area-inset-bottom)); }
+        .modal-content { width:min(100%,500px); max-height:calc(100dvh - 2rem); overflow-y:auto; padding:3.5rem clamp(1rem,4vw,2rem) 1.5rem; margin:auto; }
+        #product-detail-modal .modal-content { width:min(100%,1000px); max-width:100%; max-height:calc(100dvh - 2rem); overflow-y:auto; padding:3.5rem 1rem 1rem; }
+        #detail-image-container { flex:0 1 auto; min-height:0; }
+        #detail-image-container img { display:block; width:auto; height:auto; max-height:calc(100dvh - 12rem); max-width:100%; object-fit:contain; }
+        .close-modal { display:grid; place-items:center; width:44px; top:.35rem; right:.35rem; background:rgba(0,0,0,.65); border:0; border-radius:50%; color:#fff; font-size:1.8rem; }
+        .form-group input,.form-group textarea,.form-group select { min-width:0; font-size:16px; }
+        .admin-list-item { min-width:0; overflow-wrap:anywhere; }
+        .admin-list-item > div { display:flex; flex-wrap:wrap; gap:.5rem; }
+        .admin-tabs { max-width:100%; }
+        #whatsapp-flotante { right:max(14px,env(safe-area-inset-right)); bottom:max(14px,env(safe-area-inset-bottom)); }
+        .footer { padding-bottom:calc(5rem + env(safe-area-inset-bottom)); }
+        @media (max-width:1100px) {
+            .social-icons { display:none; }
+            .product-grid,#modifications-grid,#keyboard-modifications-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+            .modification-services { grid-template-columns:1fr; }
+            .modifications-cta { flex-direction:column; align-items:flex-start; }
+        }
+        @media (max-width:760px) {
+            :root { --header-height:132px; }
+            .header { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.3rem .6rem; background:rgba(9,10,12,.94); }
+            .header-right { display:contents; }
+            .header-logo { grid-column:1; grid-row:1; }
+            .header-logo img { width:120px; max-width:100%; }
+            .header-auth { grid-column:2; grid-row:1; min-width:0; }
+            .header-auth #login-btn { width:auto; height:auto; min-height:44px; font-size:.8rem; padding:.55rem .8rem; }
+            .header-auth #login-btn::after { content:none; }
+            #user-session { gap:.35rem !important; flex-wrap:wrap; justify-content:flex-end; }
+            #user-session .btn { font-size:.7rem; padding:.5rem .65rem; }
+            #user-info:empty { display:none; }
+            .main-nav { position:static; grid-column:1 / -1; grid-row:2; width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); padding:0; gap:.25rem; background:none; }
+            .main-nav a { font-size:.82rem; padding:.5rem; }
+            .product-grid,#modifications-grid,#keyboard-modifications-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
+            .video-grid,#latest-videos-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .hero { height:65svh; min-height:calc(var(--header-height) + 160px); }
+            .hero::before { letter-spacing:.12em; }
+            .content-section { padding:3rem 0; }
+        }
+        @media (max-width:480px) {
+            .product-grid,#modifications-grid,#keyboard-modifications-grid,.video-grid,#latest-videos-grid { grid-template-columns:minmax(0,1fr); }
+            .our-work-story { padding:1.25rem; }
+            .our-work-story h3 { font-size:1.55rem; }
+            .our-work-logo { padding:1.5rem 0 2rem; }
+            .row-title { font-size:1.7rem; }
+            .modifications-intro h3 { font-size:2rem; }
+            .modifications-cta .btn { width:100%; }
+            #whatsapp-producto-btn { width:100%; font-size:.85rem; }
+        }
+        @media (max-height:500px) and (orientation:landscape) {
+            .hero { height:100svh; min-height:calc(var(--header-height) + 120px); }
+            #detail-image-container img { max-height:calc(100dvh - 10rem); }
+        }
+        @media (hover:none) { .product-thumb:hover,.btn:hover { transform:none; } }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }
+            *,*::before,*::after { animation:none !important; transition:none !important; }
+        }
     </style>
 </head>
 <body>
     <header class="header" id="main-header">
-        <div class="header-logo"><img src="https://i.imgur.com/ZlWEt3M.png" alt="ZENIZZO Logo" id="logo-btn"></div>
+        <div class="header-logo"><img src="https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/logozenizzo.png" alt="ZENIZZO Logo" id="logo-btn"></div>
         <div class="header-right">
             <nav class="main-nav">
                 <a data-page="home-page">Inicio</a>
@@ -244,8 +420,46 @@
             <div class="hero" id="hero-section">
                 <!-- El carrusel de imágenes se inyectará aquí -->
             </div>
-            <div class="content-section"><div class="container"><h2 class="row-title">Nuestro Trabajo</h2><div id="latest-products-grid" class="product-grid justify-center"></div><div class="text-center mt-8"><a id="view-full-catalog-btn" class="btn btn-gold text-lg cursor-pointer">Ver Catálogo Completo</a></div></div></div>
-            <div class="content-section"><div class="container"><h2 class="row-title">🔧 MODIFICACIONES ZENIZZO 🎹</h2><div id="modifications-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></div></div>
+            <div class="content-section"><div class="container"><h2 class="row-title">Nuestro Trabajo</h2>
+                <div class="our-work-story">
+                    <h3>UNA IDENTIDAD PROPIA EN CADA ACORDEÓN.</h3>
+                    <p>En ZENIZZO, llevamos <strong>más de 15 años trabajando con acordeones</strong>, conociendo sus detalles y escuchando las necesidades de quienes los interpretan. Nuestra experiencia como músicos y el trabajo cercano con nuestros clientes nos impulsaron a dar un paso decisivo: fabricar nuestros propios instrumentos.</p>
+                    <p>Cada acordeón nace de una visión personal: la del músico que lo llevará en sus manos. <strong>Diseñamos a la medida</strong>, cuidando su estética, comodidad y carácter sonoro para responder a su forma de tocar y expresar la música.</p>
+                    <p>El resultado son <strong>acordeones únicos en diseño y sonido, 100 % hechos en Colombia</strong>, donde el oficio artesanal y la experiencia se unen para crear un instrumento con identidad propia.</p>
+                    <p class="our-work-signature">Hechos en Colombia. Diseñados a tu medida. Creados para sonar como tú.</p>
+                </div>
+                <div class="our-work-logo"><img src="https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/logozenizzo.png" alt="ZENIZZO Accordions" loading="lazy" decoding="async"></div>
+                <div id="latest-products-grid" class="product-grid justify-center"></div><div class="text-center mt-8"><a id="view-full-catalog-btn" class="btn btn-gold text-lg cursor-pointer">Ver Catálogo Completo</a></div></div></div>
+            <section class="content-section modifications-section" aria-labelledby="modifications-title"><div class="container">
+                <h2 class="row-title" id="modifications-title">MODIFICACIONES ZENIZZO</h2>
+                <div class="modifications-intro">
+                    <p class="modifications-eyebrow">TALLER ZENIZZO · TRABAJO ARTESANAL</p>
+                    <h3>Más posibilidades.<br><span>Una identidad propia.</span></h3>
+                    <p>Transformamos tu acordeón diatónico con nuevas posibilidades musicales y acabados que reflejan tu estilo. Tú imaginas el cambio; en nuestro taller lo hacemos realidad.</p>
+                </div>
+                <div class="modification-services">
+                    <article class="modification-service"><span class="service-number">01 / BOTONERA</span><h4>De 31 a 34 botones</h4><p>Ampliamos la botonera de tu acordeón para que explores nuevas posibilidades al interpretar.</p></article>
+                    <article class="modification-service"><span class="service-number">02 / REGISTROS</span><h4>Más colores de sonido</h4><p>Instalamos de <strong>2 a 5 registros</strong>, con opciones de Clarinete, Norteño, Bandoneón, Master y Basón, según tu instrumento y la combinación que elijas.</p></article>
+                    <article class="modification-service"><span class="service-number">03 / PERSONALIZACIÓN</span><h4>Tu estilo, en cada detalle</h4><ul><li>Cambio de botones</li><li>Acabados en nácar</li><li>Pintura personalizada</li><li>Grabado de diseños</li><li>Pedrería incrustada</li></ul></article>
+                </div>
+                <div id="modifications-grid" class="product-grid"></div>
+                <div class="modifications-cta"><div><h3>Tu próximo gran cambio empieza aquí.</h3><p>Envíanos una foto de tu acordeón y cuéntanos cómo quieres transformarlo.</p></div><a id="quote-modification-btn" class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/573016761598">Cotiza tu modificación</a></div>
+            </div></section>
+            <section class="content-section modifications-section" aria-labelledby="keyboard-modifications-title"><div class="container">
+                <h2 class="row-title" id="keyboard-modifications-title">MODIFICACIONES DE ACORDEONES DE TECLAS</h2>
+                <div class="modifications-intro">
+                    <p class="modifications-eyebrow">TALLER ZENIZZO · TRANSFORMACIÓN ARTESANAL</p>
+                    <h3>Tu acordeón tiene más por dar.<br><span>Descubre una nueva voz.</span></h3>
+                    <p>Transformamos acordeones de teclas sin registros o con solo dos de fábrica para ampliar su variedad sonora y desarrollar su potencial musical. Más matices, más versatilidad y un carácter propio en cada interpretación.</p>
+                </div>
+                <div class="modification-services">
+                    <article class="modification-service"><span class="service-number">01 / POSIBILIDADES SONORAS</span><h4>Haz crecer tu sonido</h4><p>Renueva las posibilidades de tu instrumento con una modificación orientada a ampliar su paleta sonora y potenciar su expresión, según sus características y configuración.</p></article>
+                    <article class="modification-service"><span class="service-number">02 / REGISTROS</span><h4>De 2 a 5 registros</h4><p>Instalamos registros con opciones de <strong>Clarinete, Norteño, Bandoneón, Master y Basón</strong>. Definimos contigo la combinación adecuada para tu acordeón y el sonido que buscas.</p></article>
+                    <article class="modification-service"><span class="service-number">03 / PERSONALIZACIÓN</span><h4>Una presencia única</h4><ul><li>Teclado personalizado</li><li>Acabados en nácar</li><li>Pintura personalizada</li><li>Grabado de diseños</li><li>Pedrería incrustada</li></ul></article>
+                </div>
+                <div id="keyboard-modifications-grid" class="product-grid" aria-label="Videos de modificaciones de acordeones de teclas"></div>
+                <div class="modifications-cta"><div><h3>Dale una nueva voz a tu acordeón.</h3><p>Envíanos una foto y cuéntanos qué sonido y acabado quieres conseguir.</p></div><a id="quote-keyboard-modification-btn" class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/573016761598">Cotiza tu modificación</a></div>
+            </div></section>
             <div class="content-section bg-black bg-opacity-20 py-12">
                 <div class="container">
                     <h2 class="row-title">Videos Recientes</h2>
@@ -262,11 +476,11 @@
         <section id="videos-page" class="page"><div class="container"><h1 class="page-title">Demostraciones en Video</h1><div id="full-videos-grid" class="video-grid"></div></div></section>
         <section id="admin-page" class="page"><div class="container"><div class="admin-tabs"><button class="tab-btn active" data-tab="products">Productos</button><button class="tab-btn" data-tab="videos">Videos</button><button class="tab-btn" data-tab="modifications">Modificaciones</button></div><div id="tab-products" class="tab-content active"><h2>Gestionar Productos</h2><form id="product-form" class="admin-form"><input type="hidden" id="product-id"><div class="form-group"><label for="product-title">Título</label><input type="text" id="product-title" required></div><div class="form-group"><label for="product-description">Descripción</label><textarea id="product-description" rows="4" required></textarea></div><div class="form-group"><label for="product-category">Categoría</label><input type="text" id="product-category" required></div><div class="form-group"><label for="product-images">URLs de Imágenes (separadas por coma)</label><textarea id="product-images" required></textarea></div><div class="form-group"><label for="is-featured">Destacado</label><select id="is-featured"><option value="no">No</option><option value="yes">Sí</option></select></div><button type="submit" class="btn btn-gold">Guardar</button><button type="button" id="cancel-edit-product" class="btn btn-secondary" style="display:none;">Cancelar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-product-list"></div></div><div id="tab-videos" class="tab-content"><h2>Gestionar Videos</h2><form id="video-form" class="admin-form"><div class="form-group"><label for="video-url">URL YouTube</label><input type="text" id="video-url" required></div><button type="submit" class="btn btn-gold">Añadir</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-video-list"></div></div><div id="tab-modifications" class="tab-content"><h2>Gestionar Modificaciones</h2><form id="modification-form" class="admin-form"><input type="hidden" id="modification-id"><div class="form-group"><label for="modification-title">Título</label><input type="text" id="modification-title" required></div><div class="form-group"><label for="modification-description">Descripción</label><textarea id="modification-description" rows="4" required></textarea></div><div class="form-group"><label for="modification-image">URL de Imagen</label><input type="text" id="modification-image" required></div><button type="submit" class="btn btn-gold">Guardar</button></form><hr style="margin: 2rem 0; border-color: #333;"><h3>Lista</h3><div id="admin-modification-list"></div></div></div></section>
     </main>
-    <footer class="footer"><p>&copy; 2026 ZENIZZO Accordions. Hecho a mano en Colombia.</p></footer>
-    <div id="auth-modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><form id="login-form"><h2 class="modal-title">Iniciar Sesión</h2><div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" required></div><button type="submit" class="btn btn-danger" style="width:100%;">Entrar</button></form></div></div>
+    <footer class="footer"><a class="footer-brand-link" href="https://zenizzo.onrender.com/" aria-label="Ir al inicio de ZENIZZO"><span class="footer-brand-name">ZENIZZO ACCORDIONS</span><span class="footer-brand-tagline">Artesanía colombiana. Diseño a tu medida. Sonido con identidad.</span><span class="footer-copyright">&copy; 2026 ZENIZZO Accordions. Todos los derechos reservados.</span></a></footer>
+    <div id="auth-modal" class="modal"><div class="modal-content"><button type="button" class="close-modal" aria-label="Cerrar ventana">&times;</button><form id="login-form"><h2 class="modal-title">Iniciar Sesión</h2><div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" required></div><button type="submit" class="btn btn-danger" style="width:100%;">Entrar</button></form></div></div>
     <div id="product-detail-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button type="button" class="close-modal" aria-label="Cerrar ventana">&times;</button>
             <div id="detail-image-container"></div>
             <a id="whatsapp-producto-btn" class="btn mt-4" target="_blank"><i class="fab fa-whatsapp"></i> Contactar sobre este trabajo</a>
         </div>
@@ -280,8 +494,11 @@
         const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@santiagoruiz_ac";
         const DEFAULT_WHATSAPP_MESSAGE = "Hola, estoy interesado en los acordeones ZENIZZO.";
 
+        const zenizzoPro = { id: 12, title: 'ZENIZZO Pro', category: 'Profesional', imageUrls: ['https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/zenizzo%20pro.jpg'], description: '', isFeatured: false, attributes: {} };
+
         let db = {
             products: [
+                zenizzoPro,
                 { id: 10, title: 'Acordeón Negro Mate', category: 'Profesional', imageUrls: ['https://i.imgur.com/93ExBqo.jpeg'], description: 'Un acabado moderno y elegante con un sonido profundo y resonante.', isFeatured: false, attributes: { Tono: 8, Respuesta: 8, Peso: 7, Proyección: 8 } },
                 { id: 11, title: 'Acordeón Rojo Clásico', category: 'Estudiante', imageUrls: ['https://i.imgur.com/vRmhUns.jpeg'], description: 'El instrumento perfecto para destacar en el escenario.', isFeatured: false, attributes: { Tono: 7, Respuesta: 7, Peso: 8, Proyección: 7 } },
                 { id: 1, title: 'ZENIZZO Imperial', category: 'Profesional', imageUrls: ['https://i.imgur.com/0WYbMjE.jpeg'], description: 'El pináculo del sonido vallenato.', isFeatured: false, attributes: { Tono: 9, Respuesta: 10, Peso: 7, Proyección: 9 } },
@@ -305,12 +522,33 @@
                 { id: 8, url: 'https://www.youtube.com/shorts/3u33lqzzWgw' }
             ],
             modifications: [
-                { id: 1, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/YrL9EXb.jpeg'] },
-                { id: 2, title: '🔧 MODIFICACIONES ZENIZZO 🎹', description: 'Transformamos tu acordeón para elevar su potencia y versatilidad musical:\n🎛️ Instalación de 4 registros:\n• Clarinete 🎶\n• Norteño 🌵\n• Master 🎼\n• Bandoneón 🎻\n🛠️ Instalación de 34 botones\n\n🎯 Modificación de botonera para mayor comodidad, alcance y precisión.\n✨ Hecho a mano con precisión, conservando la estética del instrumento y mejorando su expresividad.\n\n🎹 Tu acordeón, a otro nivel.', imageUrls: ['https://i.imgur.com/Zkxq2WN.jpeg'] }
+                { id: 1, title: 'MODIFICACIONES ZENIZZO', description: "Ampliación de 31 a 34 botones. Instalación de 2 a 5 registros, con opciones de Clarinete, Norteño, Bandoneón, Master y Basón, según el instrumento y la configuración elegida. Personalización estética: cambio de botones, acabados en nácar, pintura personalizada, grabado de diseños y pedrería incrustada. Trabajo artesanal en Taller ZENIZZO.", imageUrls: ['https://i.imgur.com/YrL9EXb.jpeg'] },
+                { id: 2, title: 'MODIFICACIONES ZENIZZO', description: "Ampliación de 31 a 34 botones. Instalación de 2 a 5 registros, con opciones de Clarinete, Norteño, Bandoneón, Master y Basón, según el instrumento y la configuración elegida. Personalización estética: cambio de botones, acabados en nácar, pintura personalizada, grabado de diseños y pedrería incrustada. Trabajo artesanal en Taller ZENIZZO.", imageUrls: ['https://i.imgur.com/Zkxq2WN.jpeg'] }
             ]
         };
 
-        function loadDatabase() { const savedDb = localStorage.getItem('zenizzoDb'); if (savedDb) { db = JSON.parse(savedDb); } }
+        function loadDatabase() {
+            try {
+                const savedDb = localStorage.getItem('zenizzoDb');
+                if (savedDb) {
+                    const saved = JSON.parse(savedDb);
+                    for (const key of ['products', 'videos', 'modifications']) {
+                        if (Array.isArray(saved[key])) db[key] = saved[key];
+                    }
+                }
+            } catch (error) { console.warn('No se pudieron cargar los datos guardados.', error); }
+            // Incluir el nuevo trabajo también para visitantes con un catálogo guardado.
+            const index = db.products.findIndex(p => p.imageUrls && p.imageUrls.includes(zenizzoPro.imageUrls[0]));
+            const first = index >= 0 ? db.products.splice(index, 1)[0] : { ...zenizzoPro,
+                id: Math.max(0, ...db.products.map(p => Number(p.id) || 0)) + 1 };
+            db.products.unshift(first);
+            db.modifications.forEach(item => {
+                if (item.title === '🔧 MODIFICACIONES ZENIZZO 🎹') {
+                    item.title = 'MODIFICACIONES ZENIZZO';
+                    item.description = "Ampliación de 31 a 34 botones. Instalación de 2 a 5 registros, con opciones de Clarinete, Norteño, Bandoneón, Master y Basón, según el instrumento y la configuración elegida. Personalización estética: cambio de botones, acabados en nácar, pintura personalizada, grabado de diseños y pedrería incrustada. Trabajo artesanal en Taller ZENIZZO.";
+                }
+            });
+        }
         function saveDatabase() { localStorage.setItem('zenizzoDb', JSON.stringify(db)); }
 
         function renderAll() { initHeroCarousel(); renderHomePage(); renderCatalogPage(); renderVideosPage(); renderAdminLists(); }
@@ -324,7 +562,6 @@
                 if (index === 0) slide.addClass('active zoom-in');
                 hero.append(slide);
             });
-            hero.append('<div class="hero-brand-copy">Hecho para<br>ser escuchado.</div>');
 
             setInterval(() => {
                 const slides = $('.hero-slide');
@@ -335,7 +572,7 @@
         }
 
         function renderHomePage() {
-            const homeProducts = db.products.slice(0, 3);
+            const homeProducts = db.products.slice(0, 4);
             const latestVideos = db.videos.slice(-3).reverse();
             $('#latest-products-grid').empty();
             homeProducts.forEach(p => renderProduct(p, '#latest-products-grid'));
@@ -343,6 +580,35 @@
             latestVideos.forEach(v => renderVideo(v, '#latest-videos-grid'));
             const modificationsGrid = $('#modifications-grid').empty();
             db.modifications.forEach(m => renderProduct(m, modificationsGrid));
+            [
+                'https://www.facebook.com/reel/1112286949959158',
+                'https://www.facebook.com/reel/1305762940611247'
+            ].forEach((url, index) => renderFacebookVideo(url, modificationsGrid, `Modificación de acordeón diatónico ${index + 1}`));
+            const keyboardGrid = $('#keyboard-modifications-grid').empty();
+            [
+                'https://www.facebook.com/reel/1522342209286194',
+                'https://www.facebook.com/reel/2155540595007430',
+                'https://www.facebook.com/reel/1578197037445048',
+                'https://www.facebook.com/reel/38379742635005958'
+            ].forEach((url, index) => renderFacebookVideo(url, keyboardGrid, `Modificación de acordeón de teclas ${index + 1}`));
+        }
+
+        function renderFacebookVideo(url, container, title) {
+            const card = $('<div/>', { class: 'product-thumb facebook-embed-card' });
+            const embedUrl = new URL('https://www.facebook.com/plugins/video.php');
+            embedUrl.searchParams.set('href', url);
+            embedUrl.searchParams.set('show_text', 'false');
+            embedUrl.searchParams.set('width', '500');
+            embedUrl.searchParams.set('autoplay', 'false');
+            $('<iframe/>', {
+                src: embedUrl.href, title: title,
+                loading: 'lazy', scrolling: 'no',
+                referrerpolicy: 'strict-origin-when-cross-origin',
+                allow: 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen',
+                allowfullscreen: 'allowfullscreen'
+            }).appendTo(card);
+            $('<a/>', { href: url, target: '_blank', rel: 'noopener', class: 'facebook-video-fallback', text: 'Abrir en Facebook ↗', 'aria-label': `${title}: abrir en Facebook` }).appendTo(card);
+            card.appendTo(container);
         }
 
         function renderCatalogPage() { $('#full-catalog-grid').empty(); db.products.forEach(p => renderProduct(p, '#full-catalog-grid')); }
@@ -354,27 +620,46 @@
             $(container).append(thumb);
         }
         
-        function getYoutubeId(url) {
-            let ID = '';
-            url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/|\/shorts\/)/);
-            if (url[2] !== undefined) {
-                ID = url[2].split(/[^0-9a-z_\-]/i);
-                ID = ID[0];
-            } else {
-                ID = url;
-            }
-            return ID;
+        function getYoutubeId(value) {
+            try {
+                const url = new URL(value);
+                const host = url.hostname.replace(/^www\./, '');
+                let id = '';
+                if (host === 'youtu.be') id = url.pathname.split('/')[1];
+                else if (['youtube.com', 'm.youtube.com', 'youtube-nocookie.com'].includes(host)) {
+                    id = url.searchParams.get('v') || '';
+                    const parts = url.pathname.split('/');
+                    if (['embed', 'shorts', 'live', 'v'].includes(parts[1])) id = parts[2];
+                }
+                return /^[a-zA-Z0-9_-]{11}$/.test(id || '') ? id : '';
+            } catch (_) { return ''; }
         }
 
-        function renderVideo(video, container) { 
-            try { 
-                const videoId = getYoutubeId(video.url);
-                if (videoId) { 
-                    $('<div/>', { class: 'video-player' }).html(`<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`).appendTo(container); 
-                } 
-            } catch (e) { 
-                console.error("URL de video inválida:", video.url); 
-            } 
+        function renderVideo(video, container) {
+            const videoId = getYoutubeId(video.url);
+            if (!videoId) return;
+            const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            const card = $('<div/>', { class: 'video-player' });
+            const canEmbed = /^https?:$/.test(window.location.protocol) && window.location.origin !== 'null';
+            if (canEmbed) {
+                const embedUrl = new URL(`https://www.youtube.com/embed/${videoId}`);
+                embedUrl.searchParams.set('playsinline', '1');
+                embedUrl.searchParams.set('origin', window.location.origin);
+                $('<iframe/>', {
+                    title: 'Video de ZENIZZO en YouTube',
+                    referrerpolicy: 'strict-origin-when-cross-origin',
+                    allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+                    allowfullscreen: 'allowfullscreen',
+                    loading: 'lazy'
+                }).attr('src', embedUrl.href).appendTo(card);
+            } else {
+                const preview = $('<a/>', { href: watchUrl, target: '_blank', rel: 'noopener', class: 'video-preview', 'aria-label': 'Reproducir video de ZENIZZO en YouTube' });
+                $('<img/>', { src: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`, alt: 'Video de ZENIZZO', loading: 'lazy' }).appendTo(preview);
+                $('<span/>', { class: 'video-play-label', text: '▶ Reproducir en YouTube' }).appendTo(preview);
+                preview.appendTo(card);
+            }
+            $('<a/>', { href: watchUrl, target: '_blank', rel: 'noopener', class: 'video-watch-link', text: 'Ver en YouTube ↗' }).appendTo(card);
+            card.appendTo(container);
         }
 
         function showPage(pageId) { $('.page').removeClass('active'); $('#' + pageId).addClass('active'); $(window).scrollTop(0); }
@@ -385,7 +670,7 @@
         function checkAuth() { if (sessionStorage.getItem('isAdmin') === 'true') { $('#login-btn').hide(); $('#user-session').css('display', 'flex'); } else { $('#login-btn').show(); $('#user-session').hide(); showPage('home-page'); } }
         $('#login-form').on('submit', function(e) { e.preventDefault(); if ($('#login-password').val() === ADMIN_PASSWORD) { sessionStorage.setItem('isAdmin', 'true'); checkAuth(); $('#auth-modal').fadeOut(); } else { alert('Contraseña incorrecta.'); } });
         $('#logout-btn').on('click', function() { sessionStorage.removeItem('isAdmin'); checkAuth(); });
-        $('#login-btn').on('click', () => $('#auth-modal').fadeIn());
+        $('#login-btn').on('click', () => $('#auth-modal').fadeIn().css('display', 'flex'));
         $('.close-modal').on('click', () => $('.modal').fadeOut());
 
         function renderAdminLists() {
@@ -420,11 +705,19 @@
             $('#detail-image-container').html(`<img src="${product.imageUrls[0]}" alt="${product.title}">`);
             const productMessage = `Hola, estoy interesado en el trabajo "${product.title}".`;
             $('#whatsapp-producto-btn').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(productMessage)}`);
-            $('#product-detail-modal').fadeIn();
+            $('#product-detail-modal').fadeIn().css('display', 'flex');
         }
         
+        const updateHeaderHeight = () => document.documentElement.style.setProperty('--header-height', `${document.getElementById('main-header').getBoundingClientRect().height}px`);
+        if ('ResizeObserver' in window) new ResizeObserver(updateHeaderHeight).observe(document.getElementById('main-header'));
+        window.addEventListener('resize', updateHeaderHeight);
+        updateHeaderHeight();
+        $(document).on('keydown', e => { if (e.key === 'Escape') $('.modal').fadeOut(); });
+        $('#admin-panel-btn').on('click', () => showPage('admin-page'));
         loadDatabase(); renderAll(); checkAuth();
         $('#whatsapp-flotante').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`);
+        $('#quote-modification-btn').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero cotizar una modificación para mi acordeón diatónico. Me gustaría conocer las opciones de botonera, registros y personalización estética.')}`);
+        $('#quote-keyboard-modification-btn').attr('href', `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero cotizar una modificación para mi acordeón de teclas. Me interesan la instalación de registros y la personalización estética.')}`);
         $('#youtube-channel-link').attr('href', YOUTUBE_CHANNEL_URL);
         $(window).on('scroll', () => { $('#main-header').toggleClass('scrolled', $(window).scrollTop() > 50); });
     });

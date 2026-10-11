@@ -387,6 +387,29 @@
             html { scroll-behavior:auto; }
             *,*::before,*::after { animation:none !important; transition:none !important; }
         }
+
+        .accordina-promo-section { padding:0 0 clamp(2rem,5vw,4rem); }
+        .accordina-promo { display:grid; grid-template-columns:1.35fr 1fr; max-width:980px; margin-inline:auto; overflow:hidden; border:1px solid rgba(215,180,90,.3); border-radius:16px; background:linear-gradient(135deg,#191817,#0d0e10); color:var(--text-color); text-decoration:none; box-shadow:0 20px 55px rgba(0,0,0,.25); transition:border-color .3s,box-shadow .3s; }
+        .accordina-promo-copy { min-width:0; padding:clamp(1.25rem,2.7vw,2.25rem); align-self:center; }
+        .accordina-promo-label { display:block; font-size:.7rem; letter-spacing:.2em; color:var(--gold-soft); margin-bottom:1rem; }
+        .accordina-promo h2 { font-family:var(--font-title); font-size:clamp(1.45rem,2.2vw,2rem); line-height:1.22; color:#f5f0e6; margin-bottom:1rem; overflow-wrap:anywhere; }
+        .accordina-promo p { color:#ddd8ce; font-size:.94rem; line-height:1.7; margin-bottom:.85rem; }
+        .accordina-promo .accordina-promo-lead { color:var(--gold-soft); font-weight:700; }
+        .accordina-promo-cta { display:inline-flex; align-items:center; gap:.8rem; padding:.65rem 1rem; border:1px solid rgba(215,180,90,.5); border-radius:4px; background:rgba(215,180,90,.06); color:var(--gold-soft); font-size:.84rem; font-weight:700; margin-top:.5rem; }
+        .accordina-promo-cta > span { transition:transform .3s; }
+        .accordina-promo-image { display:flex; align-items:center; justify-content:center; min-width:0; padding:clamp(1rem,2vw,2rem); background:radial-gradient(ellipse at center,#272218,#0c0d0f 75%); overflow:hidden; }
+        .accordina-promo-image img { display:block; width:100%; height:auto; max-height:350px; object-fit:contain; border-radius:8px; animation:accordina-float 7s ease-in-out infinite; }
+        .accordina-promo:hover { border-color:var(--gold-soft); box-shadow:0 24px 60px rgba(0,0,0,.4); }
+        .accordina-promo:hover .accordina-promo-cta > span { transform:translateX(4px); }
+        .accordina-promo:focus-visible { outline:3px solid var(--gold-soft); outline-offset:5px; }
+        @keyframes accordina-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+        @media (max-width:760px) {
+            .accordina-promo { grid-template-columns:minmax(0,1fr); }
+            .accordina-promo-image { padding:1rem; }
+            .accordina-promo-image img { max-height:280px; }
+        }
+        @media (max-width:480px) { .accordina-promo p { font-size:.95rem; } .accordina-promo-cta { font-size:.8rem; } }
+        @media (prefers-reduced-motion:reduce) { .accordina-promo-image img { animation:none; } }
     </style>
 </head>
 <body>
@@ -394,7 +417,7 @@
         <div class="header-logo"><img src="https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/logozenizzo.png" alt="ZENIZZO Logo" id="logo-btn"></div>
         <div class="header-right">
             <nav class="main-nav">
-                <a data-page="home-page">Inicio</a>
+                <a href="https://zenizzo.onrender.com/">Inicio</a>
                 <a data-page="catalog-page">Catálogo</a>
                 <a data-page="videos-page">Videos</a>
             </nav>
@@ -430,6 +453,20 @@
                 </div>
                 <div class="our-work-logo"><img src="https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/logozenizzo.png" alt="ZENIZZO Accordions" loading="lazy" decoding="async"></div>
                 <div id="latest-products-grid" class="product-grid justify-center"></div><div class="text-center mt-8"><a id="view-full-catalog-btn" class="btn btn-gold text-lg cursor-pointer">Ver Catálogo Completo</a></div></div></div>
+            <section class="accordina-promo-section" aria-labelledby="accordina-promo-title">
+                <div class="container">
+                    <a class="accordina-promo" href="https://accordina.onrender.com/">
+                        <div class="accordina-promo-copy">
+                            <span class="accordina-promo-label">ACCORDINAS ZENIZZO</span>
+                            <h2 id="accordina-promo-title">CONOCE LAS ACCORDINAS ZENIZZO. DESCUBRE UNA NUEVA FORMA DE SONAR.</h2>
+                            <p class="accordina-promo-lead">Pequeñas en tamaño. Grandes en expresión.</p>
+                            <p>Hechas a mano en Colombia y personalizadas a tu estilo. Lleva tu música contigo y dale una nueva voz a cada melodía.</p>
+                            <span class="accordina-promo-cta">Explora nuestras accordinas <span aria-hidden="true">→</span></span>
+                        </div>
+                        <div class="accordina-promo-image"><img src="https://raw.githubusercontent.com/xantiagonova/zenizzo/refs/heads/main/acc1.png" alt="Accordina ZENIZZO artesanal" loading="lazy" decoding="async"></div>
+                    </a>
+                </div>
+            </section>
             <section class="content-section modifications-section" aria-labelledby="modifications-title"><div class="container">
                 <h2 class="row-title" id="modifications-title">MODIFICACIONES ZENIZZO</h2>
                 <div class="modifications-intro">
